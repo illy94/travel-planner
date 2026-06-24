@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>커플 여행 플래너 | 8월 21-24일</title>
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --accent: #f59e0b;
+      --success: #10b981;
+      --danger: #ef4444;
+      --bg: #0f0f1a;
+      --card: #1a1a2e;
+      --card2: #16213e;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --border: #2d2d4e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', 'Apple SD Gothic Neo', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── HEADER ── */
+    .hero {
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 40%, #0f172a 100%);
+      padding: 60px 24px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(99,102,241,.35) 0%, transparent 70%);
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(245,158,11,.15);
+      border: 1px solid rgba(245,158,11,.4);
+      color: var(--accent);
+      font-size: 13px; font-weight: 600;
+      padding: 4px 14px; border-radius: 20px;
+      margin-bottom: 16px; position: relative;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 52px);
+      font-weight: 800; letter-spacing: -1px;
+      position: relative;
+      background: linear-gradient(90deg, #a5b4fc, #e0e7ff, #f0abfc);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero-meta {
+      display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;
+      margin-top: 20px; position: relative;
+    }
+    .hero-meta span {
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      padding: 6px 16px; border-radius: 20px;
+      font-size: 14px; color: #c7d2fe;
+    }
+
+    /* ── NAV TABS ── */
+    .tab-nav {
+      display: flex; gap: 8px; overflow-x: auto; padding: 24px 24px 0;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .tab-nav::-webkit-scrollbar { height: 4px; }
+    .tab-nav::-webkit-scrollbar-track { background: transparent; }
+    .tab-nav::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+    .tab-btn {
+      white-space: nowrap; padding: 8px 18px;
+      border: 1px solid var(--border); border-radius: 20px;
+      background: var(--card); color: var(--muted);
+      cursor: pointer; font-size: 14px; font-weight: 500;
+      transition: all .2s;
+    }
+    .tab-btn:hover { border-color: var(--primary); color: #a5b4fc; }
+    .tab-btn.active {
+      background: var(--primary); border-color: var(--primary);
+      color: #fff; font-weight: 700;
+    }
+
+    /* ── MAIN ── */
+    main { max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+    /* ── SECTION ── */
+    .section { display: none; }
+    .section.active { display: block; }
+
+    /* ── OVERVIEW TABLE ── */
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px; margin-top: 24px;
+    }
+    .ov-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 20px 16px;
+      text-align: center; transition: transform .2s;
+      cursor: pointer;
+    }
+    .ov-card:hover { transform: translateY(-4px); border-color: var(--primary); }
+    .ov-card.winner { border-color: var(--accent); background: rgba(245,158,11,.06); }
+    .ov-flag { font-size: 32px; margin-bottom: 8px; }
+    .ov-name { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .ov-price { font-size: 22px; font-weight: 800; color: var(--accent); }
+    .ov-price small { font-size: 12px; color: var(--muted); font-weight: 400; display: block; }
+    .rank-badge {
+      display: inline-block; font-size: 11px; font-weight: 700;
+      padding: 2px 8px; border-radius: 10px; margin-top: 6px;
+    }
+    .rank-1 { background: rgba(245,158,11,.2); color: var(--accent); }
+    .rank-2 { background: rgba(16,185,129,.15); color: var(--success); }
+    .rank-3 { background: rgba(99,102,241,.15); color: #a5b4fc; }
+    .rank-other { background: rgba(148,163,184,.1); color: var(--muted); }
+
+    /* ── COMPARE TABLE ── */
+    .table-wrap { overflow-x: auto; margin-top: 24px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th { background: var(--card2); color: var(--muted); font-weight: 600;
+         padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); }
+    td { padding: 11px 14px; border-bottom: 1px solid rgba(255,255,255,.04); }
+    tr:hover td { background: rgba(255,255,255,.02); }
+    .highlight { color: var(--accent); font-weight: 700; }
+    .winner-row td { background: rgba(245,158,11,.04); }
+    .winner-row td:first-child { border-left: 3px solid var(--accent); }
+
+    /* ── DEST CARD ── */
+    .dest-header {
+      display: flex; align-items: flex-start; gap: 20px; flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .dest-flag-big { font-size: 64px; line-height: 1; }
+    .dest-title h2 { font-size: 32px; font-weight: 800; margin-bottom: 4px; }
+    .dest-title p { color: var(--muted); font-size: 15px; }
+    .dest-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+    .tag {
+      font-size: 12px; font-weight: 600; padding: 3px 10px;
+      border-radius: 12px;
+    }
+    .tag-blue { background: rgba(99,102,241,.2); color: #a5b4fc; }
+    .tag-green { background: rgba(16,185,129,.2); color: #6ee7b7; }
+    .tag-orange { background: rgba(245,158,11,.2); color: #fcd34d; }
+    .tag-pink { background: rgba(236,72,153,.2); color: #f9a8d4; }
+
+    /* 3-col info grid */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px; margin-bottom: 24px;
+    }
+    .info-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 20px;
+    }
+    .info-card h3 {
+      font-size: 14px; font-weight: 700; color: var(--muted);
+      text-transform: uppercase; letter-spacing: .5px;
+      margin-bottom: 14px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .info-card ul { list-style: none; }
+    .info-card ul li {
+      padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,.04);
+      font-size: 14px; display: flex; align-items: flex-start; gap: 8px;
+    }
+    .info-card ul li:last-child { border-bottom: none; }
+    .info-card ul li::before { content: '▸'; color: var(--primary); flex-shrink: 0; }
+
+    /* weather bar */
+    .weather-box {
+      display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+    }
+    .temp-badge {
+      background: linear-gradient(135deg, #f97316, #ef4444);
+      color: #fff; border-radius: 12px; padding: 8px 16px;
+      font-size: 20px; font-weight: 800;
+    }
+    .temp-badge small { font-size: 11px; font-weight: 400; display: block; }
+    .weather-info { font-size: 13px; color: var(--muted); line-height: 1.8; }
+    .warning { color: #fca5a5; }
+    .good { color: #6ee7b7; }
+
+    /* budget breakdown */
+    .budget-table { width: 100%; font-size: 14px; }
+    .budget-table tr td:last-child { text-align: right; font-weight: 600; }
+    .budget-total { border-top: 2px solid var(--primary) !important; }
+    .budget-total td { color: var(--accent); font-size: 16px !important; font-weight: 800 !important; padding-top: 12px !important; }
+
+    /* hotel card */
+    .hotel-card {
+      background: var(--card2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 16px;
+    }
+    .hotel-name { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+    .hotel-meta { display: flex; gap: 12px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
+    .hotel-price { font-size: 20px; font-weight: 800; color: var(--accent); margin-top: 8px; }
+    .stars { color: #fbbf24; }
+
+    /* recommendation box */
+    .recommend-box {
+      background: linear-gradient(135deg, rgba(99,102,241,.15), rgba(236,72,153,.1));
+      border: 1px solid rgba(99,102,241,.4);
+      border-radius: 20px; padding: 32px;
+      margin-bottom: 24px;
+    }
+    .recommend-box h2 { font-size: 26px; font-weight: 800; margin-bottom: 8px; }
+    .reason-list { margin-top: 16px; }
+    .reason-list li {
+      padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,.06);
+      display: flex; gap: 10px; font-size: 15px;
+    }
+    .reason-list li span.icon { width: 24px; text-align: center; flex-shrink: 0; }
+
+    /* section heading */
+    .sec-heading {
+      font-size: 22px; font-weight: 800; margin-bottom: 6px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .sec-heading::after {
+      content: '';
+      flex: 1; height: 1px; background: var(--border);
+    }
+    .sec-sub { color: var(--muted); font-size: 14px; margin-bottom: 20px; }
+
+    /* progress bar */
+    .bar-wrap { margin: 6px 0; }
+    .bar-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+    .bar { height: 6px; background: rgba(255,255,255,.08); border-radius: 3px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 3px; }
+
+    footer {
+      text-align: center; padding: 40px 24px;
+      color: var(--muted); font-size: 13px;
+      border-top: 1px solid var(--border); margin-top: 48px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">✈️ 2026 Summer Trip Planner</div>
+  <h1>커플 여행 계획서</h1>
+  <div class="hero-meta">
+    <span>📅 8월 21일(목) – 24일(일)</span>
+    <span>⏱️ 3박 4일</span>
+    <span>👫 2인 커플</span>
+    <span>🛫 인천 출발</span>
+  </div>
+</div>
+
+<!-- TAB NAV -->
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="showTab('overview')">📊 전체 비교</button>
+  <button class="tab-btn" onclick="showTab('recommend')">🏆 최종 추천</button>
+  <button class="tab-btn" onclick="showTab('saga')">🇯🇵 사가</button>
+  <button class="tab-btn" onclick="showTab('qingdao')">🇨🇳 칭다오</button>
+  <button class="tab-btn" onclick="showTab('danang')">🇻🇳 다낭</button>
+  <button class="tab-btn" onclick="showTab('nhatrang')">🇻🇳 나트랑</button>
+  <button class="tab-btn" onclick="showTab('okinawa')">🇯🇵 오키나와</button>
+  <button class="tab-btn" onclick="showTab('singapore')">🇸🇬 싱가포르</button>
+</div>
+
+<main>
+
+<!-- ════════════════════════════════ OVERVIEW ════════════════════════════════ -->
+<section class="section active" id="section-overview">
+  <br>
+  <div class="sec-heading">📊 전체 비용 비교</div>
+  <p class="sec-sub">추천 호텔 기준 · 2인 합산 · 예상 현지 비용 포함</p>
+
+  <div class="overview-grid">
+    <div class="ov-card" onclick="showTab('qingdao')">
+      <div class="ov-flag">🇨🇳</div>
+      <div class="ov-name">칭다오</div>
+      <div class="ov-price">1,159,201원<small>2인 합계</small></div>
+      <span class="rank-badge rank-1">🥇 최저가</span>
+    </div>
+    <div class="ov-card" onclick="showTab('saga')">
+      <div class="ov-flag">🇯🇵</div>
+      <div class="ov-name">사가</div>
+      <div class="ov-price">1,327,887원<small>2인 합계</small></div>
+      <span class="rank-badge rank-2">🥈 2위</span>
+    </div>
+    <div class="ov-card winner" onclick="showTab('danang')">
+      <div class="ov-flag">🇻🇳</div>
+      <div class="ov-name">다낭 ⭐</div>
+      <div class="ov-price">1,401,971원<small>2인 합계</small></div>
+      <span class="rank-badge rank-3">💑 커플 추천</span>
+    </div>
+    <div class="ov-card" onclick="showTab('nhatrang')">
+      <div class="ov-flag">🇻🇳</div>
+      <div class="ov-name">나트랑</div>
+      <div class="ov-price">1,443,025원<small>2인 합계</small></div>
+      <span class="rank-badge rank-other">4위</span>
+    </div>
+    <div class="ov-card" onclick="showTab('okinawa')">
+      <div class="ov-flag">🇯🇵</div>
+      <div class="ov-name">오키나와</div>
+      <div class="ov-price">1,920,282원<small>2인 합계</small></div>
+      <span class="rank-badge rank-other">5위</span>
+    </div>
+    <div class="ov-card" onclick="showTab('singapore')">
+      <div class="ov-flag">🇸🇬</div>
+      <div class="ov-name">싱가포르</div>
+      <div class="ov-price">2,297,262원<small>2인 합계</small></div>
+      <span class="rank-badge rank-other">6위</span>
+    </div>
+  </div>
+
+  <div class="table-wrap" style="margin-top:32px">
+    <table>
+      <thead>
+        <tr>
+          <th>여행지</th>
+          <th>✈️ 항공 (2인)</th>
+          <th>🏨 숙소 (3박)</th>
+          <th>🍜 식비</th>
+          <th>🚌 교통비</th>
+          <th>🎡 관광</th>
+          <th>💆 스파</th>
+          <th>🛍️ 기타</th>
+          <th style="color:var(--accent)">합계</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>🇨🇳 칭다오</td>
+          <td>439,180</td><td>218,421</td><td>311,600</td>
+          <td>57,000</td><td>38,000</td><td>–</td>
+          <td>95,000</td>
+          <td class="highlight">1,159,201</td>
+        </tr>
+        <tr>
+          <td>🇯🇵 사가</td>
+          <td>353,310</td><td>305,577</td><td>432,000</td>
+          <td>72,000</td><td>45,000</td><td>–</td>
+          <td>120,000</td>
+          <td class="highlight">1,327,887</td>
+        </tr>
+        <tr class="winner-row">
+          <td>🇻🇳 다낭 ⭐</td>
+          <td>617,170</td><td>254,301</td><td>220,000</td>
+          <td>77,000</td><td>137,500</td><td>66,000</td>
+          <td>30,000</td>
+          <td class="highlight">1,401,971</td>
+        </tr>
+        <tr>
+          <td>🇻🇳 나트랑</td>
+          <td>707,170</td><td>278,055</td><td>162,800</td>
+          <td>44,000</td><td>165,000</td><td>66,000</td>
+          <td>20,000</td>
+          <td class="highlight">1,443,025</td>
+        </tr>
+        <tr>
+          <td>🇯🇵 오키나와</td>
+          <td>551,010</td><td>415,272</td><td>504,000</td>
+          <td>243,000</td><td>72,000</td><td>–</td>
+          <td>135,000</td>
+          <td class="highlight">1,920,282</td>
+        </tr>
+        <tr>
+          <td>🇸🇬 싱가포르</td>
+          <td>581,480</td><td>574,542</td><td>659,200</td>
+          <td>82,400</td><td>296,640</td><td>–</td>
+          <td>103,000</td>
+          <td class="highlight">2,297,262</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="margin-top:24px;padding:16px 20px;background:var(--card);border:1px solid var(--border);border-radius:12px;font-size:13px;color:var(--muted);">
+    💡 <strong style="color:var(--text)">환율 기준 (2026년 6월)</strong> &nbsp;|&nbsp;
+    JPY: 100엔 = 900원 &nbsp;·&nbsp;
+    CNY: 1위안 = 190원 &nbsp;·&nbsp;
+    VND: 100만동 = 55,000원 &nbsp;·&nbsp;
+    SGD: 1달러 = 1,030원
+  </div>
+</section>
+
+<!-- ════════════════════════════════ RECOMMEND ════════════════════════════════ -->
+<section class="section" id="section-recommend">
+  <br>
+  <div class="recommend-box">
+    <div style="font-size:13px;color:#c084fc;font-weight:700;margin-bottom:8px;">🏆 커플 여행 최종 추천</div>
+    <h2>🇻🇳 다낭 (Da Nang)</h2>
+    <div style="font-size:15px;color:var(--muted);margin-top:4px;">예상 총 비용: <strong style="color:var(--accent);font-size:18px;">1,401,971원</strong> (2인 합계)</div>
+    <ul class="reason-list">
+      <li><span class="icon">🏖️</span> 미케비치 바로 앞 4성 호텔(모나크, 평점 9.4) — 1박 84,767원의 압도적 가성비</li>
+      <li><span class="icon">📸</span> 바나힐 골든브릿지 — 커플 포토스팟 1위, SNS 최고 명소</li>
+      <li><span class="icon">🏮</span> 호이안 올드타운 야경 — 세계문화유산, 랜턴 불빛 로맨틱 분위기</li>
+      <li><span class="icon">💆</span> 2인 마사지 1회 약 33,000원 — 스파 천국</li>
+      <li><span class="icon">🌤️</span> 8월 = 다낭 건기 시즌 — 맑고 화창한 날씨 (베트남 중부 유일 여름 성수기)</li>
+      <li><span class="icon">🦞</span> 씨푸드 · 반미 · 분보후에 — 물가 저렴하고 맛집 천국</li>
+    </ul>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>🥈 2순위 — 나트랑</h3>
+      <ul>
+        <li>하바나 5성 호텔, 해변 97m</li>
+        <li>스노클링 · 섬투어 액티비티 풍부</li>
+        <li>8월 날씨 맑음 (남부 건기)</li>
+        <li>총 비용 1,443,025원 (다낭과 4만원 차이)</li>
+        <li>추천: 해변 액티비티가 목적이면 나트랑</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>🥉 3순위 — 칭다오</h3>
+      <ul>
+        <li>전체 최저가 1,159,201원</li>
+        <li>Mercure 9.5점 초특가 숙소</li>
+        <li>칭다오 맥주 + 해산물 맛집 여행</li>
+        <li>8월 기온 29°C로 쾌적 (일본보다 시원)</li>
+        <li>추천: 예산이 최우선이라면 칭다오</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>❌ 비추천 이유</h3>
+      <ul>
+        <li>오키나와: 8월 태풍 시즌 위험, 비싼 식비</li>
+        <li>싱가포르: 숙소·식비 모두 비쌈 (최고 230만원)</li>
+        <li>사가: 소도시라 3박 4일에 볼거리 부족 가능</li>
+        <li>나트랑: 항공료 최고가 (2인 70만원)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- final summary table -->
+  <div class="sec-heading" style="margin-top:16px;">📋 최종 비용 요약</div>
+  <p class="sec-sub">다낭 선택 기준 · 추천 호텔 · 2인 합계</p>
+  <div class="info-card">
+    <table class="budget-table">
+      <tr><td>✈️ 항공권 (2인)</td><td>617,170원</td></tr>
+      <tr><td>🏨 모나크 호텔 다낭 3박 (2인)</td><td>254,301원</td></tr>
+      <tr><td>🍜 식비 4일 (2인)</td><td>220,000원</td></tr>
+      <tr><td>🚌 교통비 (그랩 등)</td><td>77,000원</td></tr>
+      <tr><td>🎡 관광 (바나힐+호이안)</td><td>137,500원</td></tr>
+      <tr><td>💆 스파/마사지 1회 (2인)</td><td>66,000원</td></tr>
+      <tr><td>🛍️ 기타/쇼핑</td><td>30,000원</td></tr>
+      <tr class="budget-total"><td><strong>🧾 총합계</strong></td><td><strong>1,401,971원</strong></td></tr>
+      <tr><td style="color:var(--muted);font-size:12px;">1인당 예상</td><td style="color:var(--muted);font-size:12px;">약 700,985원</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ SAGA ════════════════════════════════ -->
+<section class="section" id="section-saga">
+  <br>
+  <div class="dest-header">
+    <div class="dest-flag-big">🇯🇵</div>
+    <div class="dest-title">
+      <h2>사가 (佐賀)</h2>
+      <p>규슈 북부 소도시 · 아리타 도자기 · 조용한 일본 감성</p>
+      <div class="dest-tags">
+        <span class="tag tag-blue">일본 소도시</span>
+        <span class="tag tag-green">가성비 항공</span>
+        <span class="tag tag-orange">도자기 · 역사</span>
+        <span class="tag tag-pink">현지인 감성</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-grid">
+    <!-- WEATHER -->
+    <div class="info-card">
+      <h3>🌡️ 8월 날씨</h3>
+      <div class="weather-box">
+        <div class="temp-badge">최고 33°C<small>최저 26°C</small></div>
+        <div class="weather-info">
+          <div>☀️ 덥고 습함 (한국과 유사)</div>
+          <div>🌧️ 소나기 잦음</div>
+          <div class="warning">⚠️ 태풍 영향 가능성</div>
+          <div>👕 반팔 · 자외선 차단 필수</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACTIVITIES -->
+    <div class="info-card">
+      <h3>🎯 할 것들</h3>
+      <ul>
+        <li>아리타 도자기 마을 탐방 & 쇼핑</li>
+        <li>요시노가리 역사 공원 (야요이 시대 유적)</li>
+        <li>사가성 터 & 사가 박물관</li>
+        <li>후쿠오카 당일치기 (전철 30분)</li>
+        <li>이마리 도자기 거리</li>
+        <li>유토피아 사가 (온천)</li>
+      </ul>
+    </div>
+
+    <!-- FOOD -->
+    <div class="info-card">
+      <h3>🍽️ 추천 음식</h3>
+      <ul>
+        <li>사가규 (A5 와규) 야키니쿠</li>
+        <li>규슈 돈코츠 라멘</li>
+        <li>모츠나베 (곱창전골)</li>
+        <li>이마리 해산물 요리</li>
+        <li>사가닌진 채소 요리</li>
+        <li>편의점 온천 계란 간식</li>
+      </ul>
+    </div>
+
+    <!-- HOTEL -->
+    <div class="info-card">
+      <h3>🏨 추천 숙소</h3>
+      <div class="hotel-card">
+        <div class="hotel-name">토요코 인 사가 에키마에</div>
+        <div class="stars">⭐⭐⭐</div>
+        <div class="hotel-meta">
+          <span>평점 8.6 / 10</span>
+          <span>사가역 68m</span>
+          <span>조식 포함</span>
+        </div>
+        <div class="hotel-price">101,859원 / 1박<br><small style="color:var(--muted);font-size:12px;">3박 합계: 305,577원</small></div>
+      </div>
+    </div>
+
+    <!-- BUDGET -->
+    <div class="info-card">
+      <h3>💰 예산 내역 (2인)</h3>
+      <table class="budget-table">
+        <tr><td>✈️ 항공 (2인)</td><td>353,310원</td></tr>
+        <tr><td>🏨 숙소 3박</td><td>305,577원</td></tr>
+        <tr><td>🍜 식비 (100엔=900원)</td><td>432,000원</td></tr>
+        <tr><td>🚌 현지 교통</td><td>72,000원</td></tr>
+        <tr><td>🎡 관광·체험</td><td>45,000원</td></tr>
+        <tr><td>🛍️ 쇼핑·기타</td><td>120,000원</td></tr>
+        <tr class="budget-total"><td><strong>합계</strong></td><td><strong>1,327,887원</strong></td></tr>
+      </table>
+    </div>
+
+    <!-- PROS/CONS -->
+    <div class="info-card">
+      <h3>⚖️ 장단점</h3>
+      <ul>
+        <li style="color:#6ee7b7">항공 최저가 (2인 353,310원)</li>
+        <li style="color:#6ee7b7">한적하고 현지인 감성 가득</li>
+        <li style="color:#6ee7b7">후쿠오카 연계 관광 가능</li>
+        <li style="color:#fca5a5">소도시라 볼거리 제한적</li>
+        <li style="color:#fca5a5">일본 물가로 식비 부담</li>
+        <li style="color:#fca5a5">8월 태풍 주의</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ QINGDAO ════════════════════════════════ -->
+<section class="section" id="section-qingdao">
+  <br>
+  <div class="dest-header">
+    <div class="dest-flag-big">🇨🇳</div>
+    <div class="dest-title">
+      <h2>칭다오 (青島)</h2>
+      <p>중국 산둥성 해안도시 · 칭다오 맥주의 고향 · 독일 식민지 역사</p>
+      <div class="dest-tags">
+        <span class="tag tag-green">전체 최저가</span>
+        <span class="tag tag-blue">맥주 & 해산물</span>
+        <span class="tag tag-orange">유럽풍 건축</span>
+        <span class="tag tag-pink">씨뷰 숙소</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>🌡️ 8월 날씨</h3>
+      <div class="weather-box">
+        <div class="temp-badge" style="background:linear-gradient(135deg,#0ea5e9,#2563eb)">최고 29°C<small>최저 23°C</small></div>
+        <div class="weather-info">
+          <div class="good">✅ 한국보다 시원하고 쾌적</div>
+          <div>🌧️ 7-8월 우기 (소나기)</div>
+          <div>🌊 바다 수영 가능 (수온 24°C)</div>
+          <div>👕 반팔 + 얇은 긴팔 준비</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-card">
+      <h3>🎯 할 것들</h3>
+      <ul>
+        <li>칭다오 맥주박물관 (1912년 양조장)</li>
+        <li>팔대관 풍경구 (유럽풍 별장가)</li>
+        <li>5.4 광장 & 올림픽 세일링 센터</li>
+        <li>잔교 선착장 (칭다오 상징)</li>
+        <li>완상청 쇼핑몰</li>
+        <li>라오산 (도교 성지 등산)</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>🍽️ 추천 음식</h3>
+      <ul>
+        <li>칭다오 생맥주 (1리터 징장맥주)</li>
+        <li>바다 해산물 (바닷가재·소라·새우)</li>
+        <li>쟁반 짜장면 (큰 쟁반에 볶음짜장)</li>
+        <li>딤섬 조식</li>
+        <li>양꼬치 & 마라탕</li>
+        <li>하이디라오 (이온몰 근처)</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>🏨 추천 숙소</h3>
+      <div class="hotel-card">
+        <div class="hotel-name">Mercure Qingting Hotel (5.4광장)</div>
+        <div class="stars">⭐⭐⭐</div>
+        <div class="hotel-meta">
+          <span>평점 9.5 / 10</span>
+          <span>5.4광장 1.2km</span>
+          <span>무료 취소</span>
+        </div>
+        <div class="hotel-price">72,807원 / 1박<br><small style="color:var(--muted);font-size:12px;">3박 합계: 218,421원</small></div>
+      </div>
+    </div>
+    <div class="info-card">
+      <h3>💰 예산 내역 (2인)</h3>
+      <table class="budget-table">
+        <tr><td>✈️ 항공 (2인)</td><td>439,180원</td></tr>
+        <tr><td>🏨 숙소 3박</td><td>218,421원</td></tr>
+        <tr><td>🍜 식비 (1위안=190원)</td><td>311,600원</td></tr>
+        <tr><td>🚌 현지 교통</td><td>57,000원</td></tr>
+        <tr><td>🎡 관광·체험</td><td>38,000원</td></tr>
+        <tr><td>🛍️ 쇼핑·기타</td><td>95,000원</td></tr>
+        <tr class="budget-total"><td><strong>합계</strong></td><td><strong>1,159,201원</strong></td></tr>
+      </table>
+    </div>
+    <div class="info-card">
+      <h3>⚖️ 장단점</h3>
+      <ul>
+        <li style="color:#6ee7b7">전체 여행지 중 최저가</li>
+        <li style="color:#6ee7b7">8월 날씨 가장 쾌적 (29°C)</li>
+        <li style="color:#6ee7b7">Mercure 평점 9.5 초특가</li>
+        <li style="color:#fca5a5">중국어 소통 불편</li>
+        <li style="color:#fca5a5">결제 불편 (알리페이/위챗페이)</li>
+        <li style="color:#fca5a5">VPN 없으면 카카오·인스타 차단</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ DANANG ════════════════════════════════ -->
+<section class="section" id="section-danang">
+  <br>
+  <div class="dest-header">
+    <div class="dest-flag-big">🇻🇳</div>
+    <div class="dest-title">
+      <h2>다낭 (Đà Nẵng) ⭐ 추천</h2>
+      <p>베트남 중부 · 미케비치 · 바나힐 · 호이안 세계문화유산</p>
+      <div class="dest-tags">
+        <span class="tag tag-pink">💑 커플 최추천</span>
+        <span class="tag tag-green">건기 시즌</span>
+        <span class="tag tag-blue">바나힐 · 호이안</span>
+        <span class="tag tag-orange">스파 천국</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>🌡️ 8월 날씨</h3>
+      <div class="weather-box">
+        <div class="temp-badge" style="background:linear-gradient(135deg,#f59e0b,#f97316)">최고 36°C<small>최저 27°C</small></div>
+        <div class="weather-info">
+          <div class="good">✅ 8월 = 다낭 건기! 최고 시즌</div>
+          <div class="good">✅ 베트남 중부 유일 맑은 여름</div>
+          <div>☀️ 연평균 일조 300일 이상</div>
+          <div>🌊 바다 수온 28°C, 수영 최적</div>
+          <div>👕 반팔 + 선크림 필수</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-card">
+      <h3>🎯 할 것들</h3>
+      <ul>
+        <li>바나힐 골든브릿지 (커플 포토 1위)</li>
+        <li>호이안 올드타운 야경 & 소원 등불</li>
+        <li>미케비치 일출 · 석양 산책</li>
+        <li>용교 (토·일 밤 불꽃 쇼)</li>
+        <li>마블마운틴 (오행산) 동굴 탐방</li>
+        <li>한 시장 & 콘 시장 쇼핑</li>
+        <li>2인 스파·마사지 (3만원대)</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>🍽️ 추천 음식</h3>
+      <ul>
+        <li>반미 (바게트 샌드위치, 1개 3,000원)</li>
+        <li>분보후에 (매운 소고기 쌀국수)</li>
+        <li>까오 러우 (호이안식 비빔면)</li>
+        <li>화이트로즈 만두 (호이안 명물)</li>
+        <li>미케비치 씨푸드 (바닷가재·새우)</li>
+        <li>미꽝 (다낭식 노란 쌀국수)</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>🏨 추천 숙소</h3>
+      <div class="hotel-card">
+        <div class="hotel-name">모나크 호텔 다낭</div>
+        <div class="stars">⭐⭐⭐⭐</div>
+        <div class="hotel-meta">
+          <span>평점 9.4 / 10</span>
+          <span>미케비치 136m</span>
+          <span>씨뷰 가능</span>
+        </div>
+        <div class="hotel-price">84,767원 / 1박<br><small style="color:var(--muted);font-size:12px;">3박 합계: 254,301원</small></div>
+      </div>
+    </div>
+    <div class="info-card">
+      <h3>💰 예산 내역 (2인)</h3>
+      <table class="budget-table">
+        <tr><td>✈️ 항공 (2인)</td><td>617,170원</td></tr>
+        <tr><td>🏨 모나크 호텔 3박</td><td>254,301원</td></tr>
+        <tr><td>🍜 식비 (100만동=55,000원)</td><td>220,000원</td></tr>
+        <tr><td>🚌 그랩 교통비</td><td>77,000원</td></tr>
+        <tr><td>🎡 바나힐 + 호이안</td><td>137,500원</td></tr>
+        <tr><td>💆 스파/마사지 1회</td><td>66,000원</td></tr>
+        <tr><td>🛍️ 기타</td><td>30,000원</td></tr>
+        <tr class="budget-total"><td><strong>합계</strong></td><td><strong>1,401,971원</strong></td></tr>
+      </table>
+    </div>
+    <div class="info-card">
+      <h3>⚖️ 장단점</h3>
+      <ul>
+        <li style="color:#6ee7b7">8월이 최고 성수기 · 맑은 날씨</li>
+        <li style="color:#6ee7b7">바나힐 + 호이안 = 커플 코스 완벽</li>
+        <li style="color:#6ee7b7">4성 호텔 해변 앞, 1박 8만원대</li>
+        <li style="color:#6ee7b7">스파·마사지 2만원대부터</li>
+        <li style="color:#fca5a5">항공료 2인 617,170원 (비교적 비쌈)</li>
+        <li style="color:#fca5a5">여름 성수기라 인파 많음</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ NHA TRANG ════════════════════════════════ -->
+<section class="section" id="section-nhatrang">
+  <br>
+  <div class="dest-header">
+    <div class="dest-flag-big">🇻🇳</div>
+    <div class="dest-title">
+      <h2>나트랑 (Nha Trang)</h2>
+      <p>베트남 남부 해양 휴양지 · 에메랄드 바다 · 스쿠버다이빙 메카</p>
+      <div class="dest-tags">
+        <span class="tag tag-blue">해양 액티비티</span>
+        <span class="tag tag-green">저렴한 식비</span>
+        <span class="tag tag-orange">5성 가성비</span>
+        <span class="tag tag-pink">섬 투어</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>🌡️ 8월 날씨</h3>
+      <div class="weather-box">
+        <div class="temp-badge" style="background:linear-gradient(135deg,#10b981,#0ea5e9)">최고 34°C<small>최저 26°C</small></div>
+        <div class="weather-info">
+          <div class="good">✅ 남부 건기 (8월 화창)</div>
+          <div>🌦️ 간헐적 소나기 (오후)</div>
+          <div>🌊 바다 수온 28-29°C</div>
+          <div>🌀 태풍 영향 없음</div>
+          <div>👕 반팔 · 우산 챙기기</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-card">
+      <h3>🎯 할 것들</h3>
+      <ul>
+        <li>4섬 스노클링 · 스쿠버다이빙 투어</li>
+        <li>빈원더스 테마파크 (케이블카)</li>
+        <li>나트랑 비치 선셋 워킹</li>
+        <li>포나가르 참파 탑 (역사 유적)</li>
+        <li>바나나 보트 · 제트스키</li>
+        <li>야시장 & 롯데마트 쇼핑</li>
+        <li>머드 온천 체험</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>🍽️ 추천 음식</h3>
+      <ul>
+        <li>분냠 (땅콩 소스 쌀국수, 명물)</li>
+        <li>냠코르 (새우·쌀가루 케이크)</li>
+        <li>바인 짱 느엉 (구운 라이스페이퍼)</li>
+        <li>해산물 BBQ (바닷가 레스토랑)</li>
+        <li>분짜 & 반미</li>
+        <li>로컬 쌀국수 (2,000원대)</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>🏨 추천 숙소</h3>
+      <div class="hotel-card">
+        <div class="hotel-name">하바나 나트랑 호텔</div>
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <div class="hotel-meta">
+          <span>평점 8.9 / 10</span>
+          <span>해변 97m</span>
+          <span>씨뷰 옵션</span>
+        </div>
+        <div class="hotel-price">92,685원 / 1박<br><small style="color:var(--muted);font-size:12px;">3박 합계: 278,055원</small></div>
+      </div>
+    </div>
+    <div class="info-card">
+      <h3>💰 예산 내역 (2인)</h3>
+      <table class="budget-table">
+        <tr><td>✈️ 항공 (2인)</td><td>707,170원</td></tr>
+        <tr><td>🏨 하바나 호텔 3박</td><td>278,055원</td></tr>
+        <tr><td>🍜 식비 (100만동=55,000원)</td><td>162,800원</td></tr>
+        <tr><td>🚌 그랩 교통비</td><td>44,000원</td></tr>
+        <tr><td>🎡 섬투어 + 빈원더스</td><td>165,000원</td></tr>
+        <tr><td>💆 스파/마사지 1회</td><td>66,000원</td></tr>
+        <tr><td>🛍️ 기타</td><td>20,000원</td></tr>
+        <tr class="budget-total"><td><strong>합계</strong></td><td><strong>1,443,025원</strong></td></tr>
+      </table>
+    </div>
+    <div class="info-card">
+      <h3>⚖️ 장단점</h3>
+      <ul>
+        <li style="color:#6ee7b7">5성 호텔이 8-9만원대 (초특가)</li>
+        <li style="color:#6ee7b7">식비 베트남 중 최저 (저물가)</li>
+        <li style="color:#6ee7b7">스노클링·섬투어 최강</li>
+        <li style="color:#fca5a5">항공 가장 비쌈 (2인 707,170원)</li>
+        <li style="color:#fca5a5">관광 액티비티 비용 높음</li>
+        <li style="color:#fca5a5">다낭보다 볼거리 약간 단조로움</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ OKINAWA ════════════════════════════════ -->
+<section class="section" id="section-okinawa">
+  <br>
+  <div class="dest-header">
+    <div class="dest-flag-big">🇯🇵</div>
+    <div class="dest-title">
+      <h2>오키나와 (沖縄)</h2>
+      <p>일본 남부 열대 섬 · 에메랄드 바다 · 류큐 왕국 문화</p>
+      <div class="dest-tags">
+        <span class="tag tag-blue">에메랄드 바다</span>
+        <span class="tag tag-orange">류큐 문화</span>
+        <span class="tag tag-green">수족관 · 다이빙</span>
+        <span class="tag tag-pink">오리온 맥주</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>🌡️ 8월 날씨</h3>
+      <div class="weather-box">
+        <div class="temp-badge">최고 32°C<small>최저 27°C</small></div>
+        <div class="weather-info">
+          <div>☀️ 덥고 습함</div>
+          <div class="warning">⚠️ 8-9월 태풍 시즌! 주의</div>
+          <div>🌊 바다 수온 28-29°C (수영 최고)</div>
+          <div>🌀 태풍 시 항공 결항 가능성</div>
+          <div>👕 반팔 + 방수 용품 필수</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-card">
+      <h3>🎯 할 것들</h3>
+      <ul>
+        <li>추라우미 수족관 (세계 최대급)</li>
+        <li>슈리성 (류큐 왕국 세계유산)</li>
+        <li>국제거리 쇼핑 & 먹방</li>
+        <li>비세 후쿠기 가로수길</li>
+        <li>오키나와 월드 (에이사 공연)</li>
+        <li>렌터카로 북부 투어</li>
+        <li>청수해변 & 에메랄드 바다 수영</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>🍽️ 추천 음식</h3>
+      <ul>
+        <li>오키나와 소바 (돼지 뼈 육수)</li>
+        <li>고야 참플루 (여주 볶음)</li>
+        <li>라후테 (흑당 삼겹살 조림)</li>
+        <li>오리온 맥주 생맥주</li>
+        <li>사타안다기 (오키나와 도너츠)</li>
+        <li>해산물 정식 (테판야키)</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>🏨 추천 숙소</h3>
+      <div class="hotel-card">
+        <div class="hotel-name">류진 호텔 우키시마 나하</div>
+        <div class="stars">⭐⭐⭐⭐.5</div>
+        <div class="hotel-meta">
+          <span>평점 9.3 / 10</span>
+          <span>국제거리 위치</span>
+          <span>매우 청결</span>
+        </div>
+        <div class="hotel-price">138,424원 / 1박<br><small style="color:var(--muted);font-size:12px;">3박 합계: 415,272원</small></div>
+      </div>
+    </div>
+    <div class="info-card">
+      <h3>💰 예산 내역 (2인)</h3>
+      <table class="budget-table">
+        <tr><td>✈️ 항공 (2인)</td><td>551,010원</td></tr>
+        <tr><td>🏨 류진 호텔 3박</td><td>415,272원</td></tr>
+        <tr><td>🍜 식비 (100엔=900원)</td><td>504,000원</td></tr>
+        <tr><td>🚗 렌터카+주유</td><td>243,000원</td></tr>
+        <tr><td>🎡 수족관 + 슈리성</td><td>72,000원</td></tr>
+        <tr><td>🛍️ 쇼핑·기타</td><td>135,000원</td></tr>
+        <tr class="budget-total"><td><strong>합계</strong></td><td><strong>1,920,282원</strong></td></tr>
+      </table>
+    </div>
+    <div class="info-card">
+      <h3>⚖️ 장단점</h3>
+      <ul>
+        <li style="color:#6ee7b7">에메랄드 바다 · 아름다운 자연</li>
+        <li style="color:#6ee7b7">류진 호텔 평점 9.3, 위치 최고</li>
+        <li style="color:#6ee7b7">일본 특유 청결·서비스</li>
+        <li style="color:#fca5a5">전체 비용 5위 (1,920,282원)</li>
+        <li style="color:#fca5a5">렌터카 필수 → 비용 + 번거로움</li>
+        <li style="color:#fca5a5">8월 태풍 가능성 높음</li>
+        <li style="color:#fca5a5">식비·렌터카 비용 부담</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════ SINGAPORE ════════════════════════════════ -->
+<section class="section" id="section-singapore">
+  <br>
+  <div class="dest-header">
+    <div class="dest-flag-big">🇸🇬</div>
+    <div class="dest-title">
+      <h2>싱가포르 (Singapore)</h2>
+      <p>동남아 도시국가 · 마리나 베이 샌즈 · 먹거리·쇼핑의 천국</p>
+      <div class="dest-tags">
+        <span class="tag tag-blue">마리나 베이</span>
+        <span class="tag tag-orange">유니버설 스튜디오</span>
+        <span class="tag tag-green">다민족 음식</span>
+        <span class="tag tag-pink">럭셔리 여행</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-grid">
+    <div class="info-card">
+      <h3>🌡️ 8월 날씨</h3>
+      <div class="weather-box">
+        <div class="temp-badge" style="background:linear-gradient(135deg,#8b5cf6,#6366f1)">최고 33°C<small>최저 26°C</small></div>
+        <div class="weather-info">
+          <div>🌦️ 열대성 기후, 연중 고온다습</div>
+          <div>🌧️ 오후 스콜 (30분-1시간)</div>
+          <div class="good">✅ 실내 관광 최적 환경</div>
+          <div>❄️ 실내 냉방 강해 가디건 필수</div>
+          <div>👕 반팔 + 얇은 긴팔</div>
+        </div>
+      </div>
+    </div>
+    <div class="info-card">
+      <h3>🎯 할 것들</h3>
+      <ul>
+        <li>유니버설 스튜디오 (센토사)</li>
+        <li>마리나 베이 샌즈 인피니티 풀 뷰</li>
+        <li>가든스 바이 더 베이 (클라우드포레스트)</li>
+        <li>차이나타운 & 리틀 인디아</li>
+        <li>오차드 로드 쇼핑</li>
+        <li>클락 키 바 & 나이트라이프</li>
+        <li>싱가포르 동물원 나이트 사파리</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>🍽️ 추천 음식</h3>
+      <ul>
+        <li>칠리 크랩 (싱가포르 국민 음식)</li>
+        <li>치킨 라이스 (맥스웰 호커센터)</li>
+        <li>락사 (코코넛 카레 쌀국수)</li>
+        <li>바쿠테 (갈비 허브탕)</li>
+        <li>나시 레막 (코코넛 밥)</li>
+        <li>두리안 아이스크림</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>🏨 추천 숙소</h3>
+      <div class="hotel-card">
+        <div class="hotel-name">호텔 미 로코르</div>
+        <div class="stars">⭐⭐⭐⭐</div>
+        <div class="hotel-meta">
+          <span>평점 8.6 / 10</span>
+          <span>MRT 148m</span>
+          <span>부기스 위치</span>
+        </div>
+        <div class="hotel-price">191,514원 / 1박<br><small style="color:var(--muted);font-size:12px;">3박 합계: 574,542원</small></div>
+      </div>
+    </div>
+    <div class="info-card">
+      <h3>💰 예산 내역 (2인)</h3>
+      <table class="budget-table">
+        <tr><td>✈️ 항공 (2인)</td><td>581,480원</td></tr>
+        <tr><td>🏨 호텔 미 로코르 3박</td><td>574,542원</td></tr>
+        <tr><td>🍜 식비 (1SGD=1,030원)</td><td>659,200원</td></tr>
+        <tr><td>🚇 MRT·버스</td><td>82,400원</td></tr>
+        <tr><td>🎡 유니버설+가든스</td><td>296,640원</td></tr>
+        <tr><td>🛍️ 쇼핑·기타</td><td>103,000원</td></tr>
+        <tr class="budget-total"><td><strong>합계</strong></td><td><strong>2,297,262원</strong></td></tr>
+      </table>
+    </div>
+    <div class="info-card">
+      <h3>⚖️ 장단점</h3>
+      <ul>
+        <li style="color:#6ee7b7">MRT 교통 편리 (렌터카 불필요)</li>
+        <li style="color:#6ee7b7">유니버설 스튜디오 · 관광 인프라</li>
+        <li style="color:#6ee7b7">영어 통용 (소통 편함)</li>
+        <li style="color:#fca5a5">전체 최고가 (230만원)</li>
+        <li style="color:#fca5a5">숙소·식비 모두 비쌈</li>
+        <li style="color:#fca5a5">3박 4일로 다 돌아보기 부족</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>✈️ 커플 여행 계획서 | 8월 21-24일 | 2인 기준</p>
+  <p style="margin-top:6px">환율 기준: 2026년 6월 · 예상 비용은 실제와 차이 있을 수 있습니다</p>
+</footer>
+
+<script>
+  function showTab(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('section-' + id).classList.add('active');
+    event.target.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>
