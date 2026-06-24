@@ -237,6 +237,46 @@
     .bar { height: 6px; background: rgba(255,255,255,.08); border-radius: 3px; overflow: hidden; }
     .bar-fill { height: 100%; border-radius: 3px; }
 
+    /* ── HOTEL CARDS ── */
+    .h-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 14px; margin-bottom: 8px;
+    }
+    .h-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 16px;
+      transition: transform .2s, border-color .2s;
+      position: relative;
+    }
+    .h-card:hover { transform: translateY(-3px); border-color: var(--primary); }
+    .h-rank {
+      display: inline-block; font-size: 11px; font-weight: 700;
+      padding: 3px 10px; border-radius: 10px; margin-bottom: 10px;
+    }
+    .h-rank.best { background: rgba(245,158,11,.2); color: var(--accent); border: 1px solid rgba(245,158,11,.3); }
+    .h-rank.rank2 { background: rgba(16,185,129,.15); color: #6ee7b7; border: 1px solid rgba(16,185,129,.2); }
+    .h-rank.rank3 { background: rgba(99,102,241,.15); color: #a5b4fc; border: 1px solid rgba(99,102,241,.2); }
+    .h-rank.rank-etc { background: rgba(148,163,184,.1); color: var(--muted); }
+    .h-name { font-size: 15px; font-weight: 700; margin-bottom: 4px; line-height: 1.3; }
+    .h-name a { color: var(--text); text-decoration: none; }
+    .h-name a:hover { color: #a5b4fc; text-decoration: underline; }
+    .h-stars { font-size: 12px; color: #fbbf24; margin-bottom: 6px; }
+    .h-meta-row { display: flex; gap: 10px; align-items: center; margin-bottom: 8px; }
+    .h-score {
+      background: var(--success); color: #fff;
+      font-size: 13px; font-weight: 800;
+      padding: 2px 8px; border-radius: 6px;
+    }
+    .h-review { font-size: 12px; color: var(--muted); }
+    .h-loc { font-size: 12px; color: var(--muted); margin-bottom: 5px; }
+    .h-feat { font-size: 12px; color: #c7d2fe; margin-bottom: 10px; line-height: 1.4; }
+    .h-price {
+      font-size: 18px; font-weight: 800; color: var(--accent);
+    }
+    .h-price span { font-size: 11px; color: var(--muted); font-weight: 400; }
+    .h-total { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
     footer {
       text-align: center; padding: 40px 24px;
       color: var(--muted); font-size: 13px;
@@ -268,6 +308,7 @@
   <button class="tab-btn" onclick="showTab('nhatrang')">🇻🇳 나트랑</button>
   <button class="tab-btn" onclick="showTab('okinawa')">🇯🇵 오키나와</button>
   <button class="tab-btn" onclick="showTab('singapore')">🇸🇬 싱가포르</button>
+  <button class="tab-btn" onclick="showTab('hotels')">🏨 전체 숙소</button>
 </div>
 
 <main>
@@ -1022,6 +1063,633 @@
     </div>
   </div>
 </section>
+
+
+<!-- ════════════════════════════════ HOTELS ════════════════════════════════ -->
+<section class="section" id="section-hotels">
+  <br>
+  <div class="sec-heading">🏨 전체 숙소 목록</div>
+  <p class="sec-sub">아고다 검색 기준 · 평점 + 위치 + 시설 고려 추천 순 정렬 · 8월 21-24일 2인 1실</p>
+
+  <div style="padding:12px 16px;background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.3);border-radius:10px;font-size:13px;color:#a5b4fc;margin-bottom:28px;">
+    💡 호텔명 클릭 시 아고다 검색 페이지로 이동합니다. 날짜·인원 필터가 자동 적용됩니다.
+  </div>
+
+  <!-- ── 사가 ── -->
+  <div class="sec-heading" style="font-size:18px;margin-bottom:12px;">🇯🇵 사가 숙소</div>
+  <div class="h-grid">
+
+    <div class="h-card">
+      <div class="h-rank best">⭐ 추천 1위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Oncri+Saga&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">온크리 (Oncri)</a></div>
+      <div class="h-stars">⭐⭐⭐.5</div>
+      <div class="h-meta-row"><span class="h-score">8.7</span><span class="h-review">1,021개</span></div>
+      <div class="h-loc">📍 후지초, 사가 · 포레스트뷰 리조트</div>
+      <div class="h-feat">✨ 자연 속 특별한 커플 숙소</div>
+      <div class="h-price">₩569,167<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 1,707,501원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank2">2위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Hotel+New+Otani+Saga&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">호텔 뉴 오타니 사가</a></div>
+      <div class="h-stars">⭐⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">8.1</span><span class="h-review">3,315개</span></div>
+      <div class="h-loc">📍 사가역 1.6km · 현청 전망대 276m</div>
+      <div class="h-feat">✨ 사가 유일 4성급 · 전망 좋음</div>
+      <div class="h-price">₩121,209<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 363,627원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank3">3위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Toyoko+Inn+Saga+Ekimae&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">토요코 인 사가 에키마에</a></div>
+      <div class="h-stars">⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">8.6</span><span class="h-review">2,701개</span></div>
+      <div class="h-loc">📍 사가역 68m · 위치 평점 9.2</div>
+      <div class="h-feat">🍳 조식 대만족 · "역에서 10걸음"</div>
+      <div class="h-price">₩101,859<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 305,577원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank-etc">4위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=TapStay+Hotel+Saga&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">탭스테이 호텔</a></div>
+      <div class="h-stars">⭐⭐⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">8.3</span><span class="h-review">522개</span></div>
+      <div class="h-loc">📍 사가역 287m · 위치 평점 8.3</div>
+      <div class="h-feat">✨ 5성급 표기 · 잔여 1개</div>
+      <div class="h-price">₩100,963<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 302,889원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank-etc">5위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Hotel+Route+Inn+Saga+Ekimae&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">호텔 루트 인 사가 에키매</a></div>
+      <div class="h-stars">⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">8.2</span><span class="h-review">2,941개</span></div>
+      <div class="h-loc">📍 사가역 119m · 위치 평점 8.6</div>
+      <div class="h-feat">✨ 무료 취소 · 객실 이동 가능</div>
+      <div class="h-price">₩159,531<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 478,593원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank-etc">6위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=APA+Hotel+Sagaeki+Minamiguchi&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">APA 호텔 사가에키-미나미구치</a></div>
+      <div class="h-stars">⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">8.0</span><span class="h-review">2,452개</span></div>
+      <div class="h-loc">📍 사가역 271m · 위치 평점 8.4</div>
+      <div class="h-feat">🔄 무료 취소</div>
+      <div class="h-price">₩103,450<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 310,350원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank-etc">7위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=APA+Hotel+Saga+Ekimae+Chuo&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">APA 호텔 사가 에키마에 추오</a></div>
+      <div class="h-stars">⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">8.0</span><span class="h-review">5,667개</span></div>
+      <div class="h-loc">📍 사가역 285m · 2024 수상</div>
+      <div class="h-feat">🔄 무료 취소</div>
+      <div class="h-price">₩100,631<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 301,893원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank-etc">8위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Hotel+Cross+Base+Tosu+Station&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">호텔 크로스 베이스 토스 스테이션</a></div>
+      <div class="h-stars">⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">8.1</span><span class="h-review">264개</span></div>
+      <div class="h-loc">📍 도스역 137m · 위치 평점 8.6</div>
+      <div class="h-feat">🔄 무료 취소</div>
+      <div class="h-price">₩99,379<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 298,137원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank-etc">9위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=ANA+Holiday+Inn+Tosu+IHG&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">ANA 홀리데이 인 토스 바이 IHG</a></div>
+      <div class="h-stars">⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">7.7</span><span class="h-review">182개</span></div>
+      <div class="h-loc">📍 도스역 1.0km</div>
+      <div class="h-feat">🔄 무료 취소</div>
+      <div class="h-price">₩118,160<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 354,480원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank-etc">10위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=SagaCity+Hotel&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">사가시티 호텔</a></div>
+      <div class="h-stars">⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">7.7</span><span class="h-review">9,425개</span></div>
+      <div class="h-loc">📍 사가역 238m</div>
+      <div class="h-feat">🔄 무료 취소</div>
+      <div class="h-price">₩84,909<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 254,727원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank-etc">11위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=KANSEI+null+Saga&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">KANSEI null 사가</a></div>
+      <div class="h-stars">⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">7.2</span><span class="h-review">54개</span></div>
+      <div class="h-loc">📍 사가역 633m</div>
+      <div class="h-feat">🔄 무료 취소</div>
+      <div class="h-price">₩123,102<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 369,306원</div>
+    </div>
+
+  </div><!-- end 사가 -->
+
+  <br>
+  <!-- ── 칭다오 ── -->
+  <div class="sec-heading" style="font-size:18px;margin-bottom:12px;">🇨🇳 칭다오 숙소</div>
+  <div class="h-grid">
+
+    <div class="h-card">
+      <div class="h-rank best">⭐ 추천 1위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Qingdao+Yihai+Garden+Hotel+May+Fourth+Square&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">칭다오 이하이 가든 호텔 (5.4 광장)</a></div>
+      <div class="h-stars">⭐⭐⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">9.5</span><span class="h-review">6,903개</span></div>
+      <div class="h-loc">📍 5.4 광장 849m · 위치 평점 9.6</div>
+      <div class="h-feat">✨ 투숙객이 뽑은 최고의 럭셔리</div>
+      <div class="h-price">₩220,686<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 662,058원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank2">2위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Mercure+Qingting+Hotel+Qingdao+May+Fourth+Square&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">Mercure Qingting Hotel (5.4광장)</a></div>
+      <div class="h-stars">⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">9.5</span><span class="h-review">814개</span></div>
+      <div class="h-loc">📍 칭다오 비어박물관 1.2km</div>
+      <div class="h-feat">✨ 평점 9.5 · 무료 취소 · 가성비 최고</div>
+      <div class="h-price">₩72,807<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 218,421원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank3">3위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Qingdao+Kaiyue+Hotel+Zhanqiao+Station&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">칭다오 카이위에 호텔 (잔차오)</a></div>
+      <div class="h-stars">⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">9.4</span><span class="h-review">1,103개</span></div>
+      <div class="h-loc">📍 잔차오 선착장 1.4km · 위치 평점 9.6</div>
+      <div class="h-feat">✨ 3성 중 최고 평점 · 무료 취소</div>
+      <div class="h-price">₩91,931<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 275,793원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank-etc">4위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Shangri-La+Qingdao&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">샹그릴라 칭다오</a></div>
+      <div class="h-stars">⭐⭐⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">9.3</span><span class="h-review">13,405개</span></div>
+      <div class="h-loc">📍 5.4 광장 717m · 위치 평점 9.5</div>
+      <div class="h-feat">✨ 럭셔리 5성 · 무료 취소</div>
+      <div class="h-price">₩241,813<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 725,439원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank-etc">5위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Yihai+Garden+Hotel+Olympic+Sailing+Center+Qingdao&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">이하이 가든 호텔 올림픽 세일링 센터</a></div>
+      <div class="h-stars">⭐⭐⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">9.3</span><span class="h-review">3,119개</span></div>
+      <div class="h-loc">📍 올림픽 세일링 센터 1.2km · 씨뷰</div>
+      <div class="h-feat">🌊 씨뷰 5성 · 무료 취소</div>
+      <div class="h-price">₩188,945<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 566,835원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank-etc">6위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Holiday+Inn+Express+Qingdao+City+Center+IHG&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">홀리데이 인 익스프레스 칭다오 IHG</a></div>
+      <div class="h-stars">⭐⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">9.2</span><span class="h-review">4,316개</span></div>
+      <div class="h-loc">📍 올림픽 세일링 센터 296m · 위치 9.3</div>
+      <div class="h-feat">🍜 미식가거리 · 이온몰 도보권</div>
+      <div class="h-price">₩137,798<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 413,394원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank-etc">7위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Grand+Regency+Hotel+Qingdao&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">그랜드 리젼시 호텔</a></div>
+      <div class="h-stars">⭐⭐⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">9.2</span><span class="h-review">4,259개</span></div>
+      <div class="h-loc">📍 씨뷰 · 무료 취소</div>
+      <div class="h-feat">🌊 씨뷰 5성 럭셔리</div>
+      <div class="h-price">₩154,532<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 463,596원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank-etc">8위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Housing+International+Hotel+Qingdao&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">하우징 인터내셔널 호텔 칭다오</a></div>
+      <div class="h-stars">⭐⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">8.7</span><span class="h-review">3,238개</span></div>
+      <div class="h-loc">📍 5.4 광장 508m · 씨뷰 · 위치 9.6</div>
+      <div class="h-feat">🌊 씨뷰 · 2025 수상 · 무료 취소</div>
+      <div class="h-price">₩148,326<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 444,978원</div>
+    </div>
+
+  </div><!-- end 칭다오 -->
+
+  <br>
+  <!-- ── 오키나와 ── -->
+  <div class="sec-heading" style="font-size:18px;margin-bottom:12px;">🇯🇵 오키나와 숙소</div>
+  <div class="h-grid">
+
+    <div class="h-card">
+      <div class="h-rank best">⭐ 추천 1위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Ryuujin+Hotel+Ukishima+Naha&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">류진 호텔 우키시마 나하</a></div>
+      <div class="h-stars">⭐⭐⭐⭐.5</div>
+      <div class="h-meta-row"><span class="h-score">9.3</span><span class="h-review">779개</span></div>
+      <div class="h-loc">📍 국제거리 중심 · 미에바시역 523m</div>
+      <div class="h-feat">✨ 매우 청결 · "어디든 돌아다닐 수 있는 위치"</div>
+      <div class="h-price">₩138,424<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 415,272원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank2">2위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Hotel+Collective+Naha+Okinawa&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">호텔 컬렉티브</a></div>
+      <div class="h-stars">⭐⭐⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">9.2</span><span class="h-review">10,811개</span></div>
+      <div class="h-loc">📍 미에바시역 475m · 위치 평점 9.7</div>
+      <div class="h-feat">🏊 수영장 있음 · 투숙객이 뽑은 럭셔리</div>
+      <div class="h-price">₩289,030<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 867,090원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank3">3위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Almont+Hotel+Naha+Kenchomae&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">알몬트 호텔 나하-겐초마에</a></div>
+      <div class="h-stars">⭐⭐⭐.5</div>
+      <div class="h-meta-row"><span class="h-score">9.0</span><span class="h-review">22,780개</span></div>
+      <div class="h-loc">📍 겐초마에역 165m · 위치 평점 9.3</div>
+      <div class="h-feat">🏪 1층 세븐일레븐 · 국제거리 도보</div>
+      <div class="h-price">₩136,299<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 408,897원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank-etc">4위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Hotel+Strata+Naha&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">호텔 스트라타 나하</a></div>
+      <div class="h-stars">⭐⭐⭐.5</div>
+      <div class="h-meta-row"><span class="h-score">8.9</span><span class="h-review">3,798개</span></div>
+      <div class="h-loc">📍 미에바시역 49m · 위치 평점 9.1</div>
+      <div class="h-feat">✨ "위치도 깔끔함도 너무 좋고"</div>
+      <div class="h-price">₩149,191<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 447,573원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank-etc">5위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Glanz+Inn+Kokusai+dori+Okinawa&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">Glanz Inn Kokusai-dori</a></div>
+      <div class="h-stars">⭐⭐⭐.5</div>
+      <div class="h-meta-row"><span class="h-score">8.8</span><span class="h-review">264개</span></div>
+      <div class="h-loc">📍 나하 도심 · 마키시역 737m</div>
+      <div class="h-feat">🔄 무료 취소 · 잔여 1개</div>
+      <div class="h-price">₩116,233<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 348,699원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank-etc">6위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Rizzan+Sea+Park+Hotel+Tancha+Bay+Okinawa&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">리잔 씨파크 호텔 탄차 베이</a></div>
+      <div class="h-stars">⭐⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">8.5</span><span class="h-review">16,732개</span></div>
+      <div class="h-loc">📍 온나촌 · 도심 28km (리조트 지역)</div>
+      <div class="h-feat">🌊 비치 리조트 · 무료 취소</div>
+      <div class="h-price">₩364,353<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 1,093,059원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank-etc">7위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Hotel+Aqua+Citta+Naha&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">호텔 아쿠아 시타 나하</a></div>
+      <div class="h-stars">⭐⭐⭐.5</div>
+      <div class="h-meta-row"><span class="h-score">8.5</span><span class="h-review">17,139개</span></div>
+      <div class="h-loc">📍 미에바시역 365m · 2024 수상</div>
+      <div class="h-feat">🔄 무료 취소</div>
+      <div class="h-price">₩177,752<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 533,256원</div>
+    </div>
+
+  </div><!-- end 오키나와 -->
+
+  <br>
+  <!-- ── 다낭 ── -->
+  <div class="sec-heading" style="font-size:18px;margin-bottom:12px;">🇻🇳 다낭 숙소</div>
+  <div class="h-grid">
+
+    <div class="h-card">
+      <div class="h-rank best">⭐ 추천 1위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Monarque+Hotel+Danang&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">모나크 호텔 다낭</a></div>
+      <div class="h-stars">⭐⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">9.4</span><span class="h-review">13,253개</span></div>
+      <div class="h-loc">📍 미케비치 136m · 씨뷰 · 위치 9.6</div>
+      <div class="h-feat">🏖️ 4성 최고 평점 · "다낭에선 모나크만"</div>
+      <div class="h-price">₩84,767<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 254,301원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank2">2위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Chi+House+Da+Nang+Hotel+Apartment&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">치 하우스 다낭 호텔 앤 아파트먼트</a></div>
+      <div class="h-stars">⭐⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">9.3</span><span class="h-review">7,951개</span></div>
+      <div class="h-loc">📍 미케비치 163m · 씨뷰 · 위치 9.5</div>
+      <div class="h-feat">🌊 "위치 최고, 마트·스파 도보권" · 2025 수상</div>
+      <div class="h-price">₩100,827<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 302,481원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank3">3위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Salmalia+Boutique+Hotel+Spa+Danang&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">살말리아 부티크 호텔 앤 스파</a></div>
+      <div class="h-stars">⭐⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">9.3</span><span class="h-review">7,881개</span></div>
+      <div class="h-loc">📍 미케비치 185m · 위치 평점 9.5</div>
+      <div class="h-feat">🏊 스파 포함 · "비치 2분, 조식 만족"</div>
+      <div class="h-price">₩90,417<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 271,251원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank-etc">4위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Estrella+Boutique+Hotel+Danang&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">에스트렐라 부티크 호텔</a></div>
+      <div class="h-stars">⭐⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">9.3</span><span class="h-review">6,590개</span></div>
+      <div class="h-loc">📍 미케비치 716m · 위치 평점 9.4</div>
+      <div class="h-feat">✨ 2025 수상 · 무료 취소</div>
+      <div class="h-price">₩74,026<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 222,078원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank-etc">5위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=SALA+Danang+Beach+Hotel&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">살라 다낭 비치 호텔</a></div>
+      <div class="h-stars">⭐⭐⭐⭐.5</div>
+      <div class="h-meta-row"><span class="h-score">9.2</span><span class="h-review">26,848개</span></div>
+      <div class="h-loc">📍 미케비치 171m · 위치 평점 9.4</div>
+      <div class="h-feat">✨ 2025 수상 · "다낭 재방문도 여기"</div>
+      <div class="h-price">₩100,272<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 300,816원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank-etc">6위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=New+Orient+Hotel+Da+Nang&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">뉴 오리엔트 호텔 다낭</a></div>
+      <div class="h-stars">⭐⭐⭐⭐.5</div>
+      <div class="h-meta-row"><span class="h-score">9.2</span><span class="h-review">7,600개</span></div>
+      <div class="h-loc">📍 다낭역 1.8km · 한 리버 뷰</div>
+      <div class="h-feat">✨ 2025 수상 · "다시 와도 여기"</div>
+      <div class="h-price">₩74,292<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 222,876원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank-etc">7위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Awaken+Danang+Hotel&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">어웨이큰 다낭 호텔</a></div>
+      <div class="h-stars">⭐⭐⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">9.0</span><span class="h-review">7,342개</span></div>
+      <div class="h-loc">📍 미케비치 875m · 위치 평점 9.1</div>
+      <div class="h-feat">✨ 투숙객이 뽑은 럭셔리 · 무료 취소</div>
+      <div class="h-price">₩110,463<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 331,389원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank-etc">8위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Balcona+Hotel+Da+Nang&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">발코나 호텔 다낭</a></div>
+      <div class="h-stars">⭐⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">9.0</span><span class="h-review">12,888개</span></div>
+      <div class="h-loc">📍 미케비치 589m · 씨뷰 · 위치 9.5</div>
+      <div class="h-feat">🌊 씨뷰 · 리노베이션 완료 · 무료 취소</div>
+      <div class="h-price">₩85,596<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 256,788원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank-etc">9위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Shilla+Monogram+Danang&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">신라 모노그램 다낭</a></div>
+      <div class="h-stars">⭐⭐⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">8.9</span><span class="h-review">5,810개</span></div>
+      <div class="h-loc">📍 논 누옥 비치 486m · 씨뷰</div>
+      <div class="h-feat">✨ 한국 브랜드 럭셔리 · 2025 수상</div>
+      <div class="h-price">₩214,376<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 643,128원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank-etc">10위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Hyatt+Regency+Danang+Resort+Spa&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">하얏트 리젠시 다낭 리조트 앤 스파</a></div>
+      <div class="h-stars">⭐⭐⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">8.7</span><span class="h-review">8,778개</span></div>
+      <div class="h-loc">📍 논 누옥 비치 367m · 씨뷰 · 2024 수상</div>
+      <div class="h-feat">🏊 리조트 풀 · 씨뷰</div>
+      <div class="h-price">₩298,437<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 895,311원</div>
+    </div>
+
+  </div><!-- end 다낭 -->
+
+  <br>
+  <!-- ── 나트랑 ── -->
+  <div class="sec-heading" style="font-size:18px;margin-bottom:12px;">🇻🇳 나트랑 숙소</div>
+  <div class="h-grid">
+
+    <div class="h-card">
+      <div class="h-rank best">⭐ 추천 1위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Havana+Nha+Trang+Hotel&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">하바나 나트랑 호텔</a></div>
+      <div class="h-stars">⭐⭐⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">8.9</span><span class="h-review">28,831개</span></div>
+      <div class="h-loc">📍 나트랑 해변 97m · 씨뷰 · 위치 9.4</div>
+      <div class="h-feat">✨ 2025 수상 · 롯데마트·야시장 도보 · 가장 많은 리뷰</div>
+      <div class="h-price">₩92,685<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 278,055원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank2">2위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Ana+Mandara+Cam+Ranh&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">아나 만다라 캠 란</a></div>
+      <div class="h-stars">⭐⭐⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">8.8</span><span class="h-review">6,515개</span></div>
+      <div class="h-loc">📍 깜란 공항 인근 해변 리조트</div>
+      <div class="h-feat">🌴 2025 수상 · 리조트형 · 무료 취소</div>
+      <div class="h-price">₩212,421<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 637,263원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank3">3위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Kymodo+Panorama+Apartment+Nha+Trang&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">키모도 파노라마 아파트먼트</a></div>
+      <div class="h-stars">⭐⭐⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">8.7</span><span class="h-review">2,903개</span></div>
+      <div class="h-loc">📍 나트랑 해변 147m · 위치 평점 9.6</div>
+      <div class="h-feat">🌊 씨뷰 · "4번 나트랑 모두 여기" · 2024 수상</div>
+      <div class="h-price">₩51,817<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 155,451원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank-etc">4위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Swandor+Cam+Ranh+Resort+Ultra+All+Inclusive&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">스완더 캄란 리조트 (올인클루시브)</a></div>
+      <div class="h-stars">⭐⭐⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">8.7</span><span class="h-review">3,461개</span></div>
+      <div class="h-loc">📍 깜란 · 씨뷰 · 도심 20.8km</div>
+      <div class="h-feat">🍽️ 올인클루시브 (식사+음료 포함)</div>
+      <div class="h-price">₩411,950<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 1,235,850원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank-etc">5위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Aquamarine+Cam+Ranh+Swandor+Ultra+All+Inclusive&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">아쿠아마린 캄란 바이 스완도르 (올인클루시브)</a></div>
+      <div class="h-stars">⭐⭐⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">8.7</span><span class="h-review">998개</span></div>
+      <div class="h-loc">📍 깜란 · 씨뷰 · 2024 신축</div>
+      <div class="h-feat">🆕 2024 신축 · 올인클루시브</div>
+      <div class="h-price">₩415,239<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 1,245,717원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank-etc">6위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Panorama+Nha+Trang+Star+Beach&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">파노라마 나트랑 스타 비치</a></div>
+      <div class="h-stars">⭐⭐⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">8.3</span><span class="h-review">4,932개</span></div>
+      <div class="h-loc">📍 나트랑 해변 140m · 위치 평점 9.3</div>
+      <div class="h-feat">🌊 씨뷰 · "위치 가격 위생 모든게 최고"</div>
+      <div class="h-price">₩62,884<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 188,652원</div>
+    </div>
+
+  </div><!-- end 나트랑 -->
+
+  <br>
+  <!-- ── 싱가포르 ── -->
+  <div class="sec-heading" style="font-size:18px;margin-bottom:12px;">🇸🇬 싱가포르 숙소</div>
+  <div class="h-grid">
+
+    <div class="h-card">
+      <div class="h-rank best">⭐ 추천 1위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=The+Standard+Singapore&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">The Standard, Singapore</a></div>
+      <div class="h-stars">⭐⭐⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">9.1</span><span class="h-review">417개</span></div>
+      <div class="h-loc">📍 오차드 · 내피어역 863m</div>
+      <div class="h-feat">✨ 투숙객이 뽑은 럭셔리 · 5성 최고 평점</div>
+      <div class="h-price">₩320,459<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 961,377원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank2">2위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=JW+Marriott+Singapore+South+Beach&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">JW 메리어트 싱가포르 사우스 비치</a></div>
+      <div class="h-stars">⭐⭐⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">8.9</span><span class="h-review">2,320개</span></div>
+      <div class="h-loc">📍 에스플러네이드역 122m · 위치 9.3</div>
+      <div class="h-feat">✨ "관광지 접근 최고" · 무료 취소</div>
+      <div class="h-price">₩688,497<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 2,065,491원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank3">3위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Village+Hotel+Sentosa+Far+East&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">빌리지 호텔 센토사</a></div>
+      <div class="h-stars">⭐⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">8.8</span><span class="h-review">12,007개</span></div>
+      <div class="h-loc">📍 유니버설 스튜디오 378m · 씨뷰</div>
+      <div class="h-feat">🎢 "유니버설 도보·비치 모노레일 가능" · 2025 수상</div>
+      <div class="h-price">₩290,566<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 871,698원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank-etc">4위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Carlton+Hotel+Singapore&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">칼튼 호텔 싱가포르</a></div>
+      <div class="h-stars">⭐⭐⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">8.7</span><span class="h-review">46,134개</span></div>
+      <div class="h-loc">📍 시티홀 · 플라이어 1.3km · 위치 9.3</div>
+      <div class="h-feat">✨ 2025 수상 · 리뷰 최다</div>
+      <div class="h-price">₩312,897<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 938,691원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank-etc">5위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Carlton+City+Hotel+Singapore&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">칼튼 시티 호텔 싱가포르</a></div>
+      <div class="h-stars">⭐⭐⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">8.7</span><span class="h-review">15,555개</span></div>
+      <div class="h-loc">📍 탄종파가역 166m · 차이나타운 665m</div>
+      <div class="h-feat">🚇 "지하철·차이나타운 바로 옆"</div>
+      <div class="h-price">₩233,481<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 700,443원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank-etc">6위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Hotel+Mi+Rochor+Singapore&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">호텔 미 로코르</a></div>
+      <div class="h-stars">⭐⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">8.6</span><span class="h-review">16,314개</span></div>
+      <div class="h-loc">📍 로코르역 148m · 오차드 1.5km</div>
+      <div class="h-feat">✨ 2025 수상 · "대가족 여행도 편리"</div>
+      <div class="h-price">₩191,514<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 574,542원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank-etc">7위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Summer+View+Hotel+Singapore&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">서머 뷰 호텔</a></div>
+      <div class="h-stars">⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">8.3</span><span class="h-review">10,659개</span></div>
+      <div class="h-loc">📍 부기스 · 로코르역 212m · 위치 9.0</div>
+      <div class="h-feat">✨ "버스·지하철 적당한 거리"</div>
+      <div class="h-price">₩153,239<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 459,717원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank-etc">8위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Hotel+Boss+Singapore&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">호텔 보스</a></div>
+      <div class="h-stars">⭐⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">8.0</span><span class="h-review">57,935개</span></div>
+      <div class="h-loc">📍 라벤더역 363m · 위치 8.6</div>
+      <div class="h-feat">✨ 리뷰 최다 (57,935개)</div>
+      <div class="h-price">₩151,754<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 455,262원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank-etc">9위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=V+Hotel+Lavender+Singapore&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">V 호텔 라벤더</a></div>
+      <div class="h-stars">⭐⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">7.9</span><span class="h-review">66,322개</span></div>
+      <div class="h-loc">📍 라벤더역 43m · 위치 평점 9.1</div>
+      <div class="h-feat">🚇 "역 바로 앞 · 주변 먹거리 풍부"</div>
+      <div class="h-price">₩144,621<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 433,863원</div>
+    </div>
+
+    <div class="h-card">
+      <div class="h-rank rank-etc">10위</div>
+      <div class="h-name"><a href="https://www.agoda.com/search?textToSearch=Copthorne+Kings+Hotel+Singapore&checkIn=2026-08-21&checkOut=2026-08-24&adults=2&rooms=1" target="_blank">콥톤 킹스 호텔 싱가포르</a></div>
+      <div class="h-stars">⭐⭐⭐⭐</div>
+      <div class="h-meta-row"><span class="h-score">7.8</span><span class="h-review">10,429개</span></div>
+      <div class="h-loc">📍 클락 키 · 하블록역 366m</div>
+      <div class="h-feat">✨ 2025 수상</div>
+      <div class="h-price">₩204,144<span>/박 (세금포함)</span></div>
+      <div class="h-total">3박 ≈ 612,432원</div>
+    </div>
+
+  </div><!-- end 싱가포르 -->
+
+</section>
+<!-- ════════════════════════════════ END HOTELS ════════════════════════════════ -->
 
 </main>
 
